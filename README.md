@@ -5,7 +5,7 @@ Simple class used for asynchronous fetching [Vue](https://github.com/vuejs/vue) 
 
 > vue-fetcher 1.x works with [Vue](https://github.com/vuejs/vue) 1.x and 2.x. It's also compatible with [vue-router](https://github.com/vuejs/vue-router) 2.x and 3.x and also with [axios](https://github.com/axios/axios), which fallbacks to window.fetch if [axios](https://github.com/axios/axios) is not detected.
 
-> vue-fetcher does not follow Single File Component approach, instead it's using 2 separate files for component logic and component template.
+> vue-fetcher does not follow Single File Component approach. It's using 2 separate files for component logic and component template instead.
 
 ---
 
@@ -97,7 +97,7 @@ let dummy = {
 };
 ```
 
-It's also possible to use vue-fetcher from fetched components, but it's necessary to save reference of vue-fetcher as global variable. By default, vue-fetcher itself tries to set itself as window.VueFetcher if this variable is unused. So it's possible to use shorthand syntax like:
+It's also possible to use vue-fetcher from fetched components, but it's necessary to save reference of vue-fetcher as global variable. By default, vue-fetcher tries to set itself as window.VueFetcher if this variable is unused. So it's possible to use shorthand syntax like:
 ```javascript
 new VueFetcher({ /* ... */ });
 // and call it like: window.VueFetcher.fetch(...);
