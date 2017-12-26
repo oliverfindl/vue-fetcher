@@ -1,5 +1,5 @@
 /**
- * vue-fetcher v1.0.0 (2017-10-25)
+ * vue-fetcher v1.0.2 (2017-12-26)
  * Copyright 2017 Oliver Findl
  * @license MIT
  */
@@ -217,7 +217,7 @@ class VueFetcher {
 				}
 
 				try {
-					component = window.eval("new window.Object(" + this._trim(component, "COMPONENT-AS-STRING") + ")");
+					component = window.eval("new window.Object(" + this._trim(component.toString(), "COMPONENT-AS-STRING") + ")");
 				} catch(error) {
 					console.error(this._errorTitle + "component eval failed [%s]", componentName);
 					console.error(error);
@@ -253,7 +253,7 @@ class VueFetcher {
 							return;
 						}
 
-						component.template = template;
+						component.template = template.toString();
 
 						this._set(component);
 						resolve(component);
