@@ -5,7 +5,7 @@ Simple class used for asynchronous fetching [Vue](https://github.com/vuejs/vue) 
 
 > vue-fetcher 1.x works with [Vue](https://github.com/vuejs/vue) 1.x and 2.x. It's also compatible with [vue-router](https://github.com/vuejs/vue-router) 2.x and 3.x and also with [axios](https://github.com/axios/axios), which fallbacks to window.fetch if [axios](https://github.com/axios/axios) is not detected.
 
-> vue-fetcher does not follow Single File Component approach. It's using 2 separate files for component logic and component template instead.
+> vue-fetcher does not follow [Single File Component](https://vuejs.org/guide/single-file-components.html) approach. It's using 2 separate files for component logic and component template instead.
 
 ---
 
