@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<base href="./" target="_self" />
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Basic single-file example</title>
+	</head>
+	<body>
+
+		<div id="app">
+
+			<hello></hello>
+
+			<goodbye></goodbye>
+
+		</div>
+
+		<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+		<script src="../dist/vue-fetcher.min.js"></script>
+		<script>
+			// init vue-fetcher
+			const fetcher = new VueFetcher();
+
+			// fetch all single-file components
+			let components = {};
+			["hello-single-file", "goodbye-single-file", /* ... */].forEach(component => {
+				components[component.replace(/-single-file$/, "")] = fetcher.fetch(component);
+			});
+
+			// init vue
+			const app = new Vue({
+				components,
+				// ...
+			}).$mount("#app");
+		</script>
+	</body>
+</html>

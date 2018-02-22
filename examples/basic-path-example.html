@@ -5,7 +5,7 @@
 		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
-		<title>Basic push example</title>
+		<title>Basic path example</title>
 	</head>
 	<body>
 
@@ -15,8 +15,6 @@
 
 			<goodbye></goodbye>
 
-			<custom-component></custom-component>
-
 		</div>
 
 		<script src="https://unpkg.com/vue@2/dist/vue.js"></script>
@@ -25,27 +23,10 @@
 			// init vue-fetcher
 			const fetcher = new VueFetcher();
 
-			// create custom component
-			let customComponent = {
-				name: "custom-component", // name is required
-				template: "<div>{{message}}</div>", // it's also possible to use inline templates or x-templates
-				data() {
-					return {
-						message: "This is custom component, which was pushed to vue-fetcher."
-					}
-				},
-				created() {
-					console.log(this.message);
-				}
-			};
-
-			// push custom component to fetcher
-			fetcher.push(customComponent);
-
 			// fetch all components
 			let components = {};
-			["hello", "goodbye", "custom-component", /* ... */].forEach(component => {
-				components[component] = fetcher.fetch(component);
+			["hello-path", "goodbye-path", /* ... */].forEach(component => {
+				components[component.replace(/-path$/, "")] = fetcher.fetch(component);
 			});
 
 			// init vue

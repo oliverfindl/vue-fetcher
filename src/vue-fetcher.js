@@ -1,5 +1,5 @@
 /**
- * vue-fetcher v1.0.7 (2018-02-22)
+ * vue-fetcher v1.1.0 (2018-02-22)
  * Copyright 2018 Oliver Findl
  * @license MIT
  */
@@ -247,9 +247,11 @@ class VueFetcher {
 					component.name = this._replace(componentName, "COMPONENT-NAME");
 				}
 
-				if(!component.hasOwnProperty("template") || !component.template.length) {
+				let _test = null;
+				const _pattern = /^\s*(path|file|url):\s*/i;
+				if(!component.hasOwnProperty("template") || !component.template.length || (_test = _pattern.test(component.template))) {
 
-					this._method([this._options.base, this._options.templateDir, componentName].join("/") + this._options.templateExt).then(response => {
+					this._method(_test ? component.template.replace(_pattern, "") : [this._options.base, this._options.templateDir, componentName].join("/") + this._options.templateExt).then(response => {
 
 						if(this._axios && [200, 304].indexOf(response.status) > -1) {
 							return response.data;
@@ -287,6 +289,7 @@ class VueFetcher {
 					});
 
 				} else {
+					component.template = component.template.replace(/^\s*(id|html):\s*/i, "");
 					this._set(component);
 					resolve(component);
 					return;

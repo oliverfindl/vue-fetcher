@@ -5,7 +5,7 @@ Simple class used for asynchronous fetching [Vue](https://github.com/vuejs/vue) 
 
 > vue-fetcher 1.x works with [Vue](https://github.com/vuejs/vue) 1.x and 2.x. It's also compatible with [vue-router](https://github.com/vuejs/vue-router) 2.x and 3.x and also with [axios](https://github.com/axios/axios), which fallbacks to window.fetch if [axios](https://github.com/axios/axios) is not detected.
 
-> vue-fetcher does not follow [Single File Component](https://vuejs.org/guide/single-file-components.html) approach. It's using 2 separate files for component logic and component template instead.
+> vue-fetcher does not follow [Single File Component](https://vuejs.org/guide/single-file-components.html) approach. It's using 2 separate files for component logic and component template (optional - can be defined in component itself) instead.
 
 ---
 
@@ -70,17 +70,18 @@ Which translates into folder structure, where components are stored in:
 ```
 static/vue/components/<component-name>.vue.js
 ```
+
 And templates in:
 ```
 static/vue/templates/<component-name>.vue.html
 ```
 
-Template files are basic HTML files, whereas component files are JSON-like files.
+Template files are basic HTML files, whereas component files are JSON-like javascript files.
 
 Example component:
 ```javascript
 {
-	template: "", // if omitted or empty, vue-fetcher will fetch template file
+	template: "...",
 	data(): {
 		// ...
 	}
@@ -90,6 +91,28 @@ Example component:
 	// ...
 }
 ```
+
+There are multiple custom template definitions supported:
+```javascript
+{
+	// basic Vue definitions
+	template: "#my-id",
+	template: "<div> ... </div>",
+
+	// id and html are optional, will get removed and will be handled like basic Vue template definition
+	template: "id: #my-id",
+	template: "html: <div> ... </div>",
+
+	// with path, file and url, vue-fetcher will fetch template file based on value in this attribute (all three variants have same functionality)
+	template: "path: ./static/...",
+	template: "file: /my-vue-project/static/...",
+	template: "url: https://.../static/...",
+
+	// if empty or omitted, vue-fetcher will fetch template file based on options
+	template: ""
+}
+```
+
 It's possible to use a dummy variable, so the file will be valid for editors with javascript syntax highlight:
 ```javascript
 let dummy = {
@@ -102,6 +125,7 @@ It's also possible to use vue-fetcher from fetched components, but it's necessar
 new VueFetcher({ /* ... */ });
 // and call it like: window.VueFetcher.fetch(...);
 ```
+
 Otherwise you need to set it as global variable via options or manually like:
 ```javascript
 let options = {
@@ -110,6 +134,7 @@ let options = {
 const fetcher = new VueFetcher(options);
 window.<my-global-variable-name> = fetcher;
 ```
+
 Or just like one-liner:
 ```javascript
 window.<my-global-variable-name> = new VueFetcher({ /* ... */ });
