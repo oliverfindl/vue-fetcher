@@ -1,5 +1,5 @@
 /**
- * vue-fetcher v1.1.0 (2018-02-22)
+ * vue-fetcher v1.1.1 (2018-02-23)
  * Copyright 2018 Oliver Findl
  * @license MIT
  */
@@ -289,7 +289,12 @@ class VueFetcher {
 					});
 
 				} else {
-					component.template = component.template.replace(/^\s*(id|html):\s*/i, "");
+					if(/^\s*!inline\s*/i.test(component.template)) {
+						delete component.template;
+					} else {
+						component.template = component.template.replace(/^\s*(id|html):\s*/i, "");
+					}
+
 					this._set(component);
 					resolve(component);
 					return;

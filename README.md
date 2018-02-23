@@ -1,4 +1,3 @@
-
 # vue-fetcher
 
 Simple class used for asynchronous fetching [Vue](https://github.com/vuejs/vue) components and templates, without need to setup and use webpack or other tools.
@@ -95,18 +94,28 @@ Example component:
 There are multiple custom template definitions supported:
 ```javascript
 {
-	// basic Vue definitions
-	template: "#my-id",
+	// basic definitions (same as Vue)
 	template: "<div> ... </div>",
+	template: `
+		<div>
+			...
+		</div>
+	`,
+
+	// x-template definition (same as Vue)
+	template: "#my-id",
+
+	// inline-template definition
+	template: "!inline",
 
 	// id and html are optional, will get removed and will be handled like basic Vue template definition
 	template: "id: #my-id",
 	template: "html: <div> ... </div>",
 
 	// with path, file and url, vue-fetcher will fetch template file based on value in this attribute (all three variants have same functionality)
-	template: "path: ./static/...",
-	template: "file: /my-vue-project/static/...",
-	template: "url: https://.../static/...",
+	template: "path: ./static/vue/...",
+	template: "file: /my-vue-project/static/vue/...",
+	template: "url: https://.../static/vue/...",
 
 	// if empty or omitted, vue-fetcher will fetch template file based on options
 	template: ""
