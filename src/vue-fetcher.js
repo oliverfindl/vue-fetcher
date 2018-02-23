@@ -1,5 +1,5 @@
 /**
- * vue-fetcher v1.1.1 (2018-02-23)
+ * vue-fetcher v1.1.2 (2018-02-23)
  * Copyright 2018 Oliver Findl
  * @license MIT
  */
@@ -28,15 +28,12 @@ class VueFetcher {
 		this._axios = window.hasOwnProperty("axios") ? true : false;
 		this._method = (this._axios ? window.axios.get : window.fetch).bind(window);
 
-		this._logTitle = "[vue-fetcher]: ";
-		this._errorTitle = this._logTitle.replace(/\]/, " error]");
-
 		this.components = {};
 
 		if(!window.hasOwnProperty(this._options.globalName)) {
 			window[this._options.globalName] = this;
 		} else {
-			this._error("cannot set VueFetcher class as global variable to window." + this._options.globalName + ", please do it manually");
+			this._console("error", "cannot set VueFetcher class as global variable to window." + this._options.globalName + ", please do it manually");
 		}
 	}
 
@@ -47,7 +44,7 @@ class VueFetcher {
 	 */
 	_get(componentName) {
 		if(!componentName) {
-			this._error("missing required arguments");
+			this._console("error", "missing required arguments");
 			return;
 		}
 
@@ -61,7 +58,7 @@ class VueFetcher {
 	 */
 	_set(component) {
 		if(!component || !component.name) {
-			this._error("missing required arguments");
+			this._console("error", "missing required arguments");
 			return;
 		}
 
@@ -76,7 +73,7 @@ class VueFetcher {
 	 */
 	_trim(value, flag) {
 		if(!value || !flag) {
-			this._error("missing required arguments");
+			this._console("error", "missing required arguments");
 			return;
 		}
 
@@ -119,7 +116,7 @@ class VueFetcher {
 	 */
 	_canTrim(value, flag) {
 		if(!value || !flag) {
-			this._error("missing required arguments");
+			this._console("error", "missing required arguments");
 			return;
 		}
 
@@ -142,7 +139,7 @@ class VueFetcher {
 	 */
 	_replace(value, flag) {
 		if(!value || !flag) {
-			this._error("missing required arguments");
+			this._console("error", "missing required arguments");
 			return;
 		}
 
@@ -158,19 +155,16 @@ class VueFetcher {
 	}
 
 	/**
-	 * Private wrapper method for console.log().
+	 * Private wrapper method for window.console.
 	*/
-	_log() {
-		Array.prototype.unshift.call(arguments, this._logTitle);
-		return console.log.apply(this, arguments);
-	}
+	_console() {
+		let _level = window.Array.prototype.shift.call(arguments);
+		if(!_level || !_level.length || ["info", "log" ,"error", "trace", "warn"].indexOf(_level) === -1 || !window.console.hasOwnProperty(_level)) {
+			return;
+		}
 
-	/**
-	 * Private wrapper method for this._error().
-	*/
-	_error() {
-		Array.prototype.unshift.call(arguments, this._errorTitle);
-		return console.error.apply(this, arguments);
+		window.Array.prototype.unshift.call(arguments, "[vue-fetcher][" + _level + "]");
+		return window.console[_level].apply(null, arguments);
 	}
 
 	/**
@@ -180,7 +174,7 @@ class VueFetcher {
 	 */
 	push(component) {
 		if(!component || !component.name) {
-			this._error("missing required arguments");
+			this._console("error", "missing required arguments");
 			return;
 		}
 
@@ -198,7 +192,7 @@ class VueFetcher {
 	 */
 	fetch(componentName) {
 		if(!componentName) {
-			this._error("missing required arguments");
+			this._console("error", "missing required arguments");
 			return;
 		}
 
@@ -218,7 +212,7 @@ class VueFetcher {
 					return response.text();
 				} else {
 					let _error = "component fetch failed [" + componentName + "]";
-					this._error(_error);
+					this._console("error", _error);
 					reject(_error);
 					return;
 				}
@@ -227,7 +221,7 @@ class VueFetcher {
 
 				if(!component) {
 					let _error = "component check failed [" + componentName + "]";
-					this._error(_error);
+					this._console("error", _error);
 					reject(_error);
 					return;
 				}
@@ -235,10 +229,10 @@ class VueFetcher {
 				try {
 					component = window.eval("new window.Object(" + this._trim(component.toString(), "COMPONENT-AS-STRING") + ")");
 				} catch(error) {
-					this._error(error);
+					this._console("error", error);
 
 					let _error = "component eval failed [" + componentName + "]";
-					this._error(_error);
+					this._console("error", _error);
 					reject(_error);
 					return;
 				}
@@ -259,7 +253,7 @@ class VueFetcher {
 							return response.text();
 						} else {
 							let _error = "template fetch failed [" + componentName + "]";
-							this._error(_error);
+							this._console("error", _error);
 							reject(_error);
 							return;
 						}
@@ -268,7 +262,7 @@ class VueFetcher {
 
 						if(!template) {
 							let _error = "template check failed [" + componentName + "]";
-							this._error(_error);
+							this._console("error", _error);
 							reject(_error);
 							return;
 						}
@@ -280,10 +274,10 @@ class VueFetcher {
 						return;
 
 					}).catch(error => {
-						this._error(error);
+						this._console("error", error);
 
 						let _error = "fetch template catch [" + componentName + "]";
-						this._error(_error);
+						this._console("error", _error);
 						reject(_error);
 						return;
 					});
@@ -301,10 +295,10 @@ class VueFetcher {
 				}
 
 			}).catch(error => {
-				this._error(error);
+				this._console("error", error);
 
 				let _error = "fetch component catch [" + componentName + "]";
-				this._error(_error);
+				this._console("error", _error);
 				reject(_error);
 				return;
 			});
