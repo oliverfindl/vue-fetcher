@@ -1,5 +1,5 @@
 /**
- * vue-fetcher v1.1.3 (2018-03-10)
+ * vue-fetcher v1.1.4 (2018-03-10)
  * Copyright 2018 Oliver Findl
  * @license MIT
  */
