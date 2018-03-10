@@ -33,7 +33,7 @@
 
 			// init vue-router
 			const router = new VueRouter({
-				routes: ["hello", "goodbye", /* ... */].map(route => {
+				routes: ["hello", "goodbye", /* ... */ ].map(route => {
 					return {
 						path: "/" + route,
 						component: fetcher.fetch(route)

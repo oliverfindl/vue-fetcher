@@ -1,6 +1,6 @@
 let dummy = {
     components: {
-        child: window.VueFetcher.fetch("parent/child")
+        child: fetcher.fetch("parent/child")
     },
 	data() {
 		return {

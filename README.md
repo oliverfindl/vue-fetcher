@@ -1,12 +1,43 @@
 # vue-fetcher
 
-Simple class used for asynchronous fetching [Vue](https://github.com/vuejs/vue) components and templates, without need to setup and use webpack or other tools.
+[![npm](https://img.shields.io/npm/v/vue-fetcher.svg?style=flat)](https://www.npmjs.com/package/vue-fetcher)
+[![npm](https://img.shields.io/npm/dt/vue-fetcher.svg?style=flat)](https://www.npmjs.com/package/vue-fetcher)
+[![npm](https://img.shields.io/npm/l/vue-fetcher.svg?style=flat)](https://www.npmjs.com/package/vue-fetcher)
+[![paypal](https://img.shields.io/badge/donate-paypal-blue.svg?colorB=0070ba&style=flat)](https://paypal.me/oliverfindl)
+
+Simple javascript class used for asynchronous fetching [Vue](https://github.com/vuejs/vue) components and templates, without need to setup and use webpack or other tools.
 
 > vue-fetcher 1.x works with [Vue](https://github.com/vuejs/vue) 1.x and 2.x. It's also compatible with [vue-router](https://github.com/vuejs/vue-router) 2.x and 3.x and also with [axios](https://github.com/axios/axios), which fallbacks to window.fetch if [axios](https://github.com/axios/axios) is not detected.
 
-> vue-fetcher does not follow [Single File Component](https://vuejs.org/guide/single-file-components.html) approach. It's using 2 separate files for component logic and component template (optional - can be defined in component itself) instead.
+> vue-fetcher does not follow [Single File Component](https://vuejs.org/guide/single-file-components.html) approach. It's using 2 separate files for component logic and component template (optional - can be defined in component logic file) instead.
 
 ---
+
+## Notice
+
+With update to version 1.1.3 (2018-03-10) vue-fetcher was refactored and some options was renamed and some removed. So if you are upgrading, rename them according [this](#configuration) readme file.
+
+---
+
+## Install
+
+Via [npm](https://npmjs.com):
+> `npm install vue-fetcher`
+
+From [unpkg](https://unpkg.com):
+> `<script src="//unpkg.com/vue-fetcher"></script>`
+
+From [jsdelivr](https://jsdelivr.com/) (via [npm](https://npmjs.com)):
+> `<script src="//cdn.jsdelivr.net/npm/vue-fetcher"></script>`
+
+From [jsdelivr](https://jsdelivr.com/) (via [GitHub](https://github.com/)):
+> `<script src="//cdn.jsdelivr.net/gh/oliverfindl/vue-fetcher/dist/vue-fetcher.min.js"></script>`
+
+From [RawGit](https://rawgit.com/) (via [GitHub](https://github.com/)):
+> `<script src="//rawgit.com/oliverfindl/vue-fetcher/master/dist/vue-fetcher.min.js"></script>`
+
+[RawGit](https://rawgit.com/) notice:  
+For production environment change branch (master) to tag (version) you have developed your app with.
 
 ## Basic usage
 
@@ -16,7 +47,7 @@ const fetcher = new VueFetcher();
 
 // fetch all components
 let components = {};
-["hello", "goodbye", /* ... */].forEach(component => {
+["hello", "goodbye", /* ... */ ].forEach(component => {
 	components[component] = fetcher.fetch(component);
 });
 
@@ -35,7 +66,7 @@ const fetcher = new VueFetcher();
 
 // init vue-router
 const router = new VueRouter({
-	routes: ["hello", "goodbye", /* ... */].map(route => {
+	routes: ["hello", "goodbye", /* ... */ ].map(route => {
 		return {
 			path: "/" + route,
 			component: fetcher.fetch(route)
@@ -53,15 +84,16 @@ const app = new Vue({
 
 ## Configuration
 
-It's possible to configure vue-fetcher with options object passed to vue-fetcher at initialization. Default options are:
+It's possible to configure vue-fetcher with options object passed to vue-fetcher at initialization.
+
+Default options:
 ```javascript
 let options = {
 	base: "static/vue",
-	componentDir: "components",
-	templateDir: "templates",
-	componentExt: ".vue.js",
-	templateExt: ".vue.html",
-	globalName: "VueFetcher"
+	componentDirectory: "components",
+	templateDirectory: "templates",
+	componentExtension: "vue.js",
+	templateExtension: "vue.html"
 };
 ```
 
@@ -83,7 +115,7 @@ Example component:
 	template: "...",
 	data(): {
 		// ...
-	}
+	},
 	methods: {
 		// ...
 	},
@@ -112,42 +144,24 @@ There are multiple custom template definitions supported:
 	template: "id: #my-id",
 	template: "html: <div> ... </div>",
 
-	// with path, file and url, vue-fetcher will fetch template file based on value in this attribute (all three variants have same functionality)
+	// with path, file and url, vue-fetcher will fetch template file based on value in this attribute (all three variants have same internal functionality)
 	template: "path: ./static/vue/...",
 	template: "file: /my-vue-project/static/vue/...",
 	template: "url: https://.../static/vue/...",
 
-	// if empty or omitted, vue-fetcher will fetch template file based on options
+	// if empty or omitted, vue-fetcher will fetch template file based on vue-fetcher options set at initialization
 	template: ""
 }
 ```
 
-It's possible to use a dummy variable, so the file will be valid for editors with javascript syntax highlight:
+It's possible to use a dummy variable in your component logic file, so the syntax will be valid for editors with javascript syntax highlight:
 ```javascript
 let dummy = {
 	// ...
 };
 ```
 
-It's also possible to use vue-fetcher from fetched components, but it's necessary to save reference of vue-fetcher as global variable. By default, vue-fetcher tries to set itself as window.VueFetcher if this variable is unused. So it's possible to use shorthand syntax like:
-```javascript
-new VueFetcher({ /* ... */ });
-// and call it like: window.VueFetcher.fetch(...);
-```
-
-Otherwise you need to set it as global variable via options or manually like:
-```javascript
-let options = {
-	// ...
-};
-const fetcher = new VueFetcher(options);
-window.<my-global-variable-name> = fetcher;
-```
-
-Or just like one-liner:
-```javascript
-window.<my-global-variable-name> = new VueFetcher({ /* ... */ });
-```
+It's also possible to use vue-fetcher from fetched components, but it's necessary to save reference of vue-fetcher as global variable.
 
 ---
 
