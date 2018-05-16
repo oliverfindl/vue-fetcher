@@ -1,5 +1,5 @@
 /**
- * vue-fetcher v1.1.4 (2018-03-10)
+ * vue-fetcher v1.1.5 (2018-05-16)
  * Copyright 2018 Oliver Findl
  * @license MIT
  */
@@ -15,6 +15,8 @@ class VueFetcher {
 	 */
 	constructor(options) {
 		options = options || {};
+
+		this._name = "vue-fetcher";
 
 		this._axios = window.hasOwnProperty("axios");
 		this._method = (this._axios ? window.axios.get : window.fetch).bind(window);
@@ -95,11 +97,11 @@ class VueFetcher {
 	*/
 	_console() {
 		let _level = window.Array.prototype.shift.call(arguments);
-		if(!_level || !_level.length || ["info", "log" ,"error", "trace", "warn"].indexOf(_level) === -1 || !window.console.hasOwnProperty(_level)) {
+		if(!_level || !_level.length || ["debug", "error", "info", "log", "trace", "warn"].indexOf(_level) === -1 || !window.console.hasOwnProperty(_level)) {
 			return;
 		}
 
-		window.Array.prototype.unshift.call(arguments, "[vue-fetcher][" + _level + "]");
+		window.Array.prototype.unshift.call(arguments, `[${this._name}][${_level}]`);
 		return window.console[_level].apply(null, arguments);
 	}
 
