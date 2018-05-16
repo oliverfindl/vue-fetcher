@@ -1,8 +1,10 @@
 /**
- * vue-fetcher v1.1.5 (2018-05-16)
+ * vue-fetcher v1.1.6 (2018-05-16)
  * Copyright 2018 Oliver Findl
  * @license MIT
  */
+
+"use strict";
 
 /**
  * Class responsible for asynchronous fetching of Vue components and templates.
