@@ -53,9 +53,7 @@ const fetcher = new VueFetcher();
 
 // fetch all components
 let components = {};
-["hello", "goodbye", /* ... */ ].forEach(component => {
-	components[component] = fetcher.fetch(component);
-});
+["hello", "goodbye", /* ... */ ].forEach(component => components[component] = fetcher.fetch(component));
 
 // init vue
 const app = new Vue({
@@ -72,12 +70,10 @@ const fetcher = new VueFetcher();
 
 // init vue-router
 const router = new VueRouter({
-	routes: ["hello", "goodbye", /* ... */ ].map(route => {
-		return {
-			path: "/" + route,
-			component: fetcher.fetch(route)
-		};
-	}),
+	routes: ["hello", "goodbye", /* ... */ ].map(route => ({
+		path: "/" + route,
+		component: fetcher.fetch(route)
+	})),
 	// ...
 });
 

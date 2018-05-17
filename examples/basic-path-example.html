@@ -25,9 +25,7 @@
 
 			// fetch all components
 			let components = {};
-			["hello-path", "goodbye-path", /* ... */ ].forEach(component => {
-				components[component.replace(/-path$/, "")] = fetcher.fetch(component);
-			});
+			["hello-path", "goodbye-path", /* ... */ ].forEach(component => components[component.replace(/-path$/, "")] = fetcher.fetch(component));
 
 			// init vue
 			const app = new Vue({

@@ -25,9 +25,7 @@
 
 			// fetch all single-file components
 			let components = {};
-			["hello-single-file", "goodbye-single-file", /* ... */ ].forEach(component => {
-				components[component.replace(/-single-file$/, "")] = fetcher.fetch(component);
-			});
+			["hello-single-file", "goodbye-single-file", /* ... */ ].forEach(component => components[component.replace(/-single-file$/, "")] = fetcher.fetch(component));
 
 			// init vue
 			const app = new Vue({

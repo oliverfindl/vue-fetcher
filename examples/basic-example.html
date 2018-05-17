@@ -25,9 +25,7 @@
 
 			// fetch all components
 			let components = {};
-			["hello", "goodbye", /* ... */ ].forEach(component => {
-				components[component] = fetcher.fetch(component);
-			});
+			["hello", "goodbye", /* ... */ ].forEach(component => components[component] = fetcher.fetch(component));
 
 			// init vue
 			const app = new Vue({
