@@ -1,6 +1,6 @@
 {
 	"name": "vue-fetcher",
-	"version": "1.1.7",
+	"version": "1.1.8",
 	"description": "Simple javascript class used for asynchronous fetching Vue components and templates, without need to setup and use webpack or other tools.",
 	"main": "dist/vue-fetcher.min.js",
 	"unpkg": "dist/vue-fetcher.min.js",
