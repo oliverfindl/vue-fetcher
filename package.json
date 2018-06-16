@@ -1,6 +1,6 @@
 {
 	"name": "vue-fetcher",
-	"version": "1.1.8",
+	"version": "1.1.9",
 	"description": "Simple javascript class used for asynchronous fetching Vue components and templates, without need to setup and use webpack or other tools.",
 	"main": "dist/vue-fetcher.min.js",
 	"unpkg": "dist/vue-fetcher.min.js",
@@ -12,8 +12,8 @@
 		"example": "examples"
 	},
 	"scripts": {
-		"build": "babel src/vue-fetcher.js --out-file dist/vue-fetcher.min.js --presets=env,minify",
-		"watch": "babel src/vue-fetcher.js --out-file dist/vue-fetcher.min.js --presets=env,minify --watch"
+		"build": "babel src/vue-fetcher.js --out-file dist/vue-fetcher.min.js --presets=env,minify,stage-2",
+		"watch": "babel src/vue-fetcher.js --out-file dist/vue-fetcher.min.js --presets=env,minify,stage-2 --watch"
 	},
 	"repository": {
 		"type": "git",
@@ -34,6 +34,7 @@
 	"devDependencies": {
 		"babel-cli": "^6.26.0",
 		"babel-preset-env": "^1.7.0",
-		"babel-preset-minify": "^0.4.3"
+		"babel-preset-minify": "^0.4.3",
+		"babel-preset-stage-2": "^6.24.1"
 	}
 }
