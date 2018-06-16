@@ -1,5 +1,5 @@
 /**
- * vue-fetcher v1.1.9 (2018-06-16)
+ * vue-fetcher v1.2.0 (2018-06-16)
  * Copyright 2018 Oliver Findl
  * @license MIT
  */
@@ -15,9 +15,7 @@ class VueFetcher {
 	 * Class constructor.
 	 * @param {object} options
 	 */
-	constructor(options) {
-		options = options || {};
-
+	constructor(options = {}) {
 		this._name = "vue-fetcher";
 
 		this._axios = window.hasOwnProperty("axios");
@@ -57,7 +55,7 @@ class VueFetcher {
 	 * @param {string} componentName
 	 * @returns {object}
 	 */
-	_get(componentName) {
+	_get(componentName = "") {
 		if(!componentName || !componentName.length) {
 			this._console("error", "missing required arguments");
 			return;
@@ -71,7 +69,7 @@ class VueFetcher {
 	 * @param {object} component
 	 * @returns {boolean}
 	 */
-	_set(component) {
+	_set(component = {}) {
 		if(!component || !component.hasOwnProperty("name") || !component.name.length) {
 			this._console("error", "missing required arguments");
 			return;
@@ -85,7 +83,7 @@ class VueFetcher {
 	 * @param {string} string
 	 * @returns {string}
 	 */
-	_slug(string) {
+	_slug(string = "") {
 		if(!string || !string.length) {
 			this._console("error", "missing required arguments");
 			return;
@@ -99,7 +97,7 @@ class VueFetcher {
 	*/
 	_console() {
 		let _level = window.Array.prototype.shift.call(arguments);
-		if(!_level || !_level.length || ["debug", "error", "info", "log", "trace", "warn"].indexOf(_level) === -1 || !window.console.hasOwnProperty(_level)) {
+		if(!_level || !_level.length || !["debug", "error", "info", "log", "trace", "warn"].includes(_level) || !window.console.hasOwnProperty(_level)) {
 			return;
 		}
 
@@ -112,7 +110,7 @@ class VueFetcher {
 	 * @param {object} component
 	 * @returns {boolean}
 	 */
-	push(component) {
+	push(component = {}) {
 		if(!component || !component.hasOwnProperty("name") || !component.name.length) {
 			this._console("error", "missing required arguments");
 			return;
@@ -126,7 +124,7 @@ class VueFetcher {
 	 * @param {string} componentName
 	 * @returns {Function}
 	 */
-	fetch(componentName) {
+	fetch(componentName = "") {
 		if(!componentName || !componentName.length) {
 			this._console("error", "missing required arguments");
 			return;
@@ -142,14 +140,14 @@ class VueFetcher {
 
 			this._method([[this._options.base, this._options.componentDirectory, componentName].join("/"), this._options.componentExtension].join(".")).then(response => {
 
-				if(this._ok.indexOf(response.status) > -1) {
+				if(this._ok.includes(response.status)) {
 					if(this._axios) {
 						return response.data.toString();
 					} else {
 						return response.text();
 					}
 				} else {
-					let _error = "component fetch failed [" + componentName + "]";
+					let _error = `component fetch failed [${componentName}]`;
 					this._console("error", _error);
 					reject(_error);
 					return;
@@ -158,18 +156,18 @@ class VueFetcher {
 			}).then(component => {
 
 				if(!component || !component.length || !this._patterns.testComponentString.test(component)) {
-					let _error = "component check failed [" + componentName + "]";
+					let _error = `component check failed [${componentName}]`;
 					this._console("error", _error);
 					reject(_error);
 					return;
 				}
 
 				try {
-					component = window.eval.call(null, "new window.Object(" + component.replace(this._patterns.trimComponentString, "") + ");");
+					component = window.eval.call(null, `new window.Object(${component.replace(this._patterns.trimComponentString, "")});`);
 				} catch(error) {
 					this._console("error", error);
 
-					let _error = "component eval failed [" + componentName + "]";
+					let _error = `component eval failed [${componentName}]`;
 					this._console("error", _error);
 					reject(_error);
 					return;
@@ -184,14 +182,14 @@ class VueFetcher {
 
 					this._method(_path ? component.template.replace(this._patterns.testTemplatePath, "") : [[this._options.base, this._options.templateDirectory, componentName].join("/"), this._options.templateExtension].join(".")).then(response => {
 
-						if(this._ok.indexOf(response.status) > -1) {
+						if(this._ok.includes(response.status)) {
 							if(this._axios) {
 								return response.data.toString();
 							} else {
 								return response.text();
 							}
 						} else {
-							let _error = "template fetch failed [" + componentName + "]";
+							let _error = `template fetch failed [${componentName}]`;
 							this._console("error", _error);
 							reject(_error);
 							return;
@@ -200,7 +198,7 @@ class VueFetcher {
 					}).then(template => {
 
 						if(!template || !template.length || !this._patterns.testTemplateString.test(template)) {
-							let _error = "template check failed [" + componentName + "]";
+							let _error = `template check failed [${componentName}]`;
 							this._console("error", _error);
 							reject(_error);
 							return;
@@ -215,7 +213,7 @@ class VueFetcher {
 					}).catch(error => {
 						this._console("error", error);
 
-						let _error = "fetch template catch [" + componentName + "]";
+						let _error = `fetch template catch [${componentName}]`;
 						this._console("error", _error);
 						reject(_error);
 						return;
@@ -236,7 +234,7 @@ class VueFetcher {
 			}).catch(error => {
 				this._console("error", error);
 
-				let _error = "fetch component catch [" + componentName + "]";
+				let _error = `fetch component catch [${componentName}]`;
 				this._console("error", _error);
 				reject(_error);
 				return;
