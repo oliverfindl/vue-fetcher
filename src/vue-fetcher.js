@@ -1,5 +1,5 @@
 /**
- * vue-fetcher v1.2.0 (2018-06-16)
+ * vue-fetcher v1.2.1 (2018-08-30)
  * Copyright 2018 Oliver Findl
  * @license MIT
  */
@@ -20,7 +20,7 @@ class VueFetcher {
 
 		this._axios = window.hasOwnProperty("axios");
 		this._method = (this._axios ? window.axios.get : window.fetch).bind(window);
-		this._ok = [200, 304];
+		this._ok = [200, 204, 304];
 
 		this._patterns = {
 			trimBase: /\/+$/,

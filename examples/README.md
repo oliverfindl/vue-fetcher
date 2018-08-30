@@ -1,17 +1,15 @@
 # vue-fetcher examples
 
----
+## [Basic axios example](https://rawgit.com/oliverfindl/vue-fetcher/master/examples/basic-axios-example.html)
 
-## basic-axios-example
+## [Basic example](https://rawgit.com/oliverfindl/vue-fetcher/master/examples/basic-example.html)
 
-## basic-example
+## [Basic parent-child example](https://rawgit.com/oliverfindl/vue-fetcher/master/examples/basic-parent-child-example.html)
 
-## basic-parent-child-example 
+## [Basic path example](https://rawgit.com/oliverfindl/vue-fetcher/master/examples/basic-path-example.html)
 
-## basic-path-example
+## [Basic push example](https://rawgit.com/oliverfindl/vue-fetcher/master/examples/basic-push-example.html)
 
-## basic-push-example
+## [Basic router example](https://rawgit.com/oliverfindl/vue-fetcher/master/examples/basic-router-example.html)
 
-## basic-router-example
-
-## basic-single-file-example
+## [Basic single-file example](https://rawgit.com/oliverfindl/vue-fetcher/master/examples/basic-single-file-example.html)

@@ -1,14 +1,12 @@
 let dummy = {
 	template: `
 		<div>
-			{{message}}
+			{{ message }}
 		</div>
 	`,
-	data() {
-		return {
-			message: "Goodbye world!"
-		}
-	},
+	data: () => ({
+		message: "Goodbye world!"
+	}),
 	created() {
 		console.log(this.message);
 	}

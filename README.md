@@ -23,7 +23,7 @@ With update to version 1.1.3 (2018-03-10) vue-fetcher was refactored and some op
 
 Via [npm](https://npmjs.com/) [[package](https://www.npmjs.com/package/vue-fetcher)]:
 ```bash
-npm install vue-fetcher
+$ npm install vue-fetcher
 ```
 
 Via [yarn](https://yarnpkg.com/en/) [[package](https://yarnpkg.com/en/package/vue-fetcher)]:
@@ -36,28 +36,10 @@ From [unpkg](https://unpkg.com/):
 <script src="//unpkg.com/vue-fetcher"></script>
 ```
 
-From [packd](https://bundle.run/):
-```html
-<script src="//bundle.run/vue-fetcher"></script>
-```
-
-From [jsDelivr](https://jsdelivr.com/) (via [npm](https://npmjs.com/)) [[package](https://www.jsdelivr.com/package/npm/vue-fetcher)]:
+From [jsDelivr](https://jsdelivr.com/) [[package](https://www.jsdelivr.com/package/npm/vue-fetcher)]:
 ```html
 <script src="//cdn.jsdelivr.net/npm/vue-fetcher"></script>
 ```
-
-From [jsDelivr](https://jsdelivr.com/) (via [GitHub](https://github.com/)) [[package](https://www.jsdelivr.com/package/gh/oliverfindl/vue-fetcher)]:
-```html
-<script src="//cdn.jsdelivr.net/gh/oliverfindl/vue-fetcher/dist/vue-fetcher.min.js"></script>
-```
-
-From [RawGit](https://rawgit.com/) (via [GitHub](https://github.com/)):
-```html
-<script src="//rawgit.com/oliverfindl/vue-fetcher/master/dist/vue-fetcher.min.js"></script>
-```
-
-[RawGit](https://rawgit.com/) notice:  
-For production environment change branch (master) to tag (version) you have developed your app with.
 
 ## Basic usage
 
